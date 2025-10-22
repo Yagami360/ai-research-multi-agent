@@ -1,0 +1,16 @@
+# MCP Server Configuration
+# 各 MCP サーバーの設定を定義
+
+servers:
+  github:
+    name: "GitHub MCP Server"
+    type: "stdio"
+    command: "npx"
+    args:
+      - "-y"
+      - "@github/github-mcp-server"
+    env:
+      GITHUB_TOKEN: "${GITHUB_TOKEN}"
+    allowed_tools:
+      - "mcp__github__*"
+    description: "GitHub リポジトリ、Issue、PR の操作"
