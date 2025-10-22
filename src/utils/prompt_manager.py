@@ -78,6 +78,8 @@ class PromptManager:
 
 **リポジトリ**: `{agent_config.get('repository', '')}`
 
+**Issue URL**: `{agent_config.get('issue_url', '')}`
+
 **内容**: {agent_config.get('content', '')}
 
 **取得対象ラベル**:

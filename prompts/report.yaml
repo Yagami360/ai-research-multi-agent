@@ -4,8 +4,12 @@
 source_agents:
   ai_tech_catchup_agent:
     title: "最新 AI Tech 情報キャッチアップ用 AI Agent"
-    repository: "Yagami360/ai-tech-catchup-agent"
+    repository: "https://github.com/Yagami360/ai-tech-catchup-agent"
     content: "AI技術ニュース、企業発表、製品動向、OSS動向、市場トレンド"
+    issue_url:
+      - "report": https://github.com/Yagami360/ai-tech-catchup-agent/issues?q=is%3Aissue%20label%3Areport
+      - "weekly-report": https://github.com/Yagami360/ai-tech-catchup-agent/issues?q=is%3Aissue%20label%3Aweekly-report
+      - "monthly-report": https://github.com/Yagami360/ai-tech-catchup-agent/issues?q=is%3Aissue%20label%3Amonthly-report
     labels:
       - "report"
       - "weekly-report"
@@ -25,8 +29,12 @@ source_agents:
 
   ai_paper_catchup_agent:
     title: "最新 AI 論文情報キャッチアップ用 AI Agent"
-    repository: "Yagami360/ai-paper-catchup-agent"
+    repository: "https://github.com/Yagami360/ai-paper-catchup-agent"
     content: "最新のAI研究論文、学術動向、技術的ブレークスルー"
+    issue_url:
+      - "report": https://github.com/Yagami360/ai-paper-catchup-agent/issues?q=is%3Aissue%20label%3Areport
+      - "weekly-report": https://github.com/Yagami360/ai-paper-catchup-agent/issues?q=is%3Aissue%20label%3Aweekly-report
+      - "monthly-report": https://github.com/Yagami360/ai-paper-catchup-agent/issues?q=is%3Aissue%20label%3Amonthly-report
     labels:
       - "report"
       - "weekly-report"

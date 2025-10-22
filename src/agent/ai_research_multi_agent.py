@@ -67,6 +67,7 @@ class AIResearchMultiAgent:
             if not prompt:
                 logger.error("プロンプトを取得できませんでした")
                 return {"status": "error", "message": "プロンプトの取得に失敗しました"}
+            logger.info(f"入力プロンプト: {prompt}")
 
             # 2. LLM で最新情報を検索
             logger.info("LLM モデル名で最新情報を検索中...")
