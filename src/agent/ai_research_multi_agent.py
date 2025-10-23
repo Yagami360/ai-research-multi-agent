@@ -182,7 +182,7 @@ class AIResearchMultiAgent:
 *このレポートは AI Research Multi Agent によって自動生成されました。*
 """
                 issue_result = self.github_client.create_issue(
-                    title=f"📊 AI R&D Action Plan Monthly Report - {week_title}",
+                    title=f"📊 AI R&D Action Plan Weekly Report - {week_title}",
                     body=issue_body,
                     labels=["weekly-report", self.model_name],
                 )

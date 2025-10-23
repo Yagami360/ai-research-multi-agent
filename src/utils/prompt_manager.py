@@ -134,10 +134,6 @@ class PromptManager:
             else:
                 kwargs["news_count"] = str(settings.news_count)
 
-        # 現在の年号を動的に設定
-        if "current_year" not in kwargs:
-            kwargs["current_year"] = str(datetime.now().year)
-
         # 期間を動的に設定（前日まで）
         if "week_period" not in kwargs:
             today = datetime.now()
@@ -175,15 +171,15 @@ class PromptManager:
             # ニュース件数が含まれている場合は置換
             if "{news_count}" in prompt_text and "news_count" in kwargs:
                 prompt_text = prompt_text.replace("{news_count}", kwargs["news_count"])
-            # 現在の年号が含まれている場合は置換
-            if "{current_year}" in prompt_text and "current_year" in kwargs:
-                prompt_text = prompt_text.replace("{current_year}", kwargs["current_year"])
-            # 週間期間が含まれている場合は置換
-            if "{week_period}" in prompt_text and "week_period" in kwargs:
-                prompt_text = prompt_text.replace("{week_period}", kwargs["week_period"])
-            # 月間期間が含まれている場合は置換
-            if "{month_period}" in prompt_text and "month_period" in kwargs:
-                prompt_text = prompt_text.replace("{month_period}", kwargs["month_period"])
+            # レポートタイプに応じて{period}を適切な期間に置換
+            if "{period}" in prompt_text:
+                if prompt_type == "weekly_report" and "week_period" in kwargs:
+                    prompt_text = prompt_text.replace("{period}", kwargs["week_period"])
+                elif prompt_type == "monthly_report" and "month_period" in kwargs:
+                    prompt_text = prompt_text.replace("{period}", kwargs["month_period"])
+                elif prompt_type == "report":
+                    prompt_text = prompt_text.replace("{period}", kwargs["week_period"])
+            
             # MCP指示が含まれている場合は置換
             if "{mcp_tools}" in prompt_text and "mcp_tools" in kwargs:
                 prompt_text = prompt_text.replace("{mcp_tools}", kwargs["mcp_tools"])

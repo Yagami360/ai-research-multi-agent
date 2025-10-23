@@ -61,12 +61,12 @@ report:
     4. 学習プラン策定: 優先技術の効率的な学習スケジュールを作成
 
     # 出力の原則
-    - アクション志向: 「今週の優先アクション」を明確に
+    - アクション志向: 「{period}の優先アクション」を明確に
     - データドリブン: 全ての判断にAgent1/Agent2のデータで根拠を示す
     - 具体性: 抽象的な提案ではなく、時刻・URL・具体的手順を提示
 
     # 重要な制約
-    - Agent1とAgent2のデータのみを使用（憶測・創作禁止）
+    - Agent1（ai-tech-catchup-agent）とAgent2（ai-paper-catchup-agent）のデータのみを使用（憶測・創作禁止）
     - 全ての主張に元データ（Issue番号、記事、論文）の参照を付ける
     - スコアリングは定量的根拠に基づく
     - 時間見積もりは現実的に（過大評価しない）
@@ -92,19 +92,20 @@ report:
       - 期間フィルタリングの方法は各Agent定義に記載されている通り
 
     方法B: WebSearch機能を使用（GitHub MCPサーバーが利用できない場合）
-      - 各ソースAgentのリポジトリに対して、以下のようなクエリでWebSearchを実行:
-      - site:github.com/Yagami360/ai-tech-catchup-agent issues label:report
-      - site:github.com/Yagami360/ai-tech-catchup-agent issues label:weekly-report
-      - site:github.com/Yagami360/ai-tech-catchup-agent issues label:monthly-report
-      - site:github.com/Yagami360/ai-paper-catchup-agent issues label:report
-      - site:github.com/Yagami360/ai-paper-catchup-agent issues label:weekly-report
-      - site:github.com/Yagami360/ai-paper-catchup-agent issues label:monthly-report
+      - 以下の2つのソースAgentリポジトリからIssueを取得してください
+      - ai-tech-catchup-agent: site:github.com/Yagami360/ai-tech-catchup-agent issues label:report
+      - ai-tech-catchup-agent: site:github.com/Yagami360/ai-tech-catchup-agent issues label:weekly-report  
+      - ai-tech-catchup-agent: site:github.com/Yagami360/ai-tech-catchup-agent issues label:monthly-report
+      - ai-paper-catchup-agent: site:github.com/Yagami360/ai-paper-catchup-agent issues label:report
+      - ai-paper-catchup-agent: site:github.com/Yagami360/ai-paper-catchup-agent issues label:weekly-report
+      - ai-paper-catchup-agent: site:github.com/Yagami360/ai-paper-catchup-agent issues label:monthly-report
       - 取得したIssue URLをWebFetch機能で開いて、Issue本文全体を読み取る
       - 取得期間: レポート作成時点から過去数ヶ月以内のIssueを全て取得
 
     取得後の確認:
-    - Agent1レポート取得: Issue番号、日付、トークン数を記録
-    - Agent2レポート取得: Issue番号、日付、トークン数を記録
+    - Agent1（ai-tech-catchup-agent）レポート取得: Issue番号、日付、トークン数を記録
+    - Agent2（ai-paper-catchup-agent）レポート取得: Issue番号、日付、トークン数を記録
+    - 指定されたソースAgentからデータが取得できない場合は、エラーを報告し、代替データソースは使用しない
 
     ---
 
@@ -171,21 +172,21 @@ report:
        - 技術の成熟曲線（実用期=10点、研究期=5点）
        - 次世代技術の萌芽（まだ先=10点、すぐ=5点）
 
-    6. スキルギャップ (/10)
-       - 現時点では全て10点（未習得想定）
+    6. スキル習得度 (/10)
+       - 現時点では全て0点（未習得想定）
        - 将来的に https://github.com/Yagami360 の全 GitHub レポジトリからスキル習得状況情報を取得して、動的に調整
 
     ---
 
-    ## Step 4: Top {news_count} 選定と今週のアクション生成
+    ## Step 4: Top {news_count} 選定と{period}のアクション生成
 
-    スコア上位{news_count}個のトピックについて、「今週やるべきこと」を生成してください。
+    スコア上位{news_count}個のトピックについて、「{period}やるべきこと」を生成してください。
 
     各トピックに含めるべき内容:
     1. スコア内訳の表形式サマリー
     2. Agent1からの具体的情報（企業名、製品名、数値）
     3. Agent2からの関連論文Top {news_count}（タイトル、発表日、被引用数、Code有無）
-    4. 今週の優先アクション
+    4. {period}の優先アクション
 
     ---
 
@@ -211,12 +212,15 @@ report:
     2. Agent2の関連論文トレンド（20%）
     3. 論文→製品化の時間差分析（20%）
     4. 市場データ（20%）
+    - 重要ポイント
+      - AI 関連のクラウドサービス利用料金による売上予想
+      - AI 関連のサーバー購入費用（GPUサーバー、データセンターなど）による売上予想
 
     ---
 
     ## Step 7: 学習プラン生成
 
-    Top {news_count} トピックの学習スケジュール（１週間）を作成してください。
+    Top {news_count} トピックの学習スケジュール（{period}）を作成してください。
 
     スケジュール設計の原則:
     - 全体像把握（全体の10~30%の時間）
@@ -240,29 +244,30 @@ report:
     |[xxx](xxx)|[xxx](xxx)|YYYY-MM-DD ~ YYYY-MM-DD|xxx tokens|xx.xx%|
     |[xxx](xxx)|[xxx](xxx)|YYYY-MM-DD ~ YYYY-MM-DD|xxx tokens|xx.xx%|
 
-    - ソース名: 各 Agent の GitHub リポジトリ名など
-    - レポート: 各 Agent の GitHub Issue の URL など
-    - 調査期間: 各 Agent の GitHub Issue レポートの調査期間
-    - データ量: 各 Agent の GitHub Issue の本文のトークン数など
+    - ソース名: 各ソース Agent の GitHub リポジトリ名など
+    - レポート: 各ソース Agent の GitHub Issue の URL など
+    - 調査期間: 各ソース Agent の GitHub Issue レポートの調査期間
+    - データ量: 各ソース Agent の GitHub Issue の本文のトークン数など
 
-    ## 🔥 今週の優先トピック Top {news_count}（表形式で記載）
-    今週の優先トピック Top {news_count} について、トピック概要、スコア、優先根拠、アクションプランなどの概要を表形式で記載
+    ## 🔥 優先トピック Top {news_count} : {period}（表形式で記載）
+    {period}の優先トピック Top {news_count} について、トピック概要、スコア、優先根拠、アクションプランなどの概要を表形式で記載
     その後、各優先トピックの詳細を箇条書きで記載
 
-    ## 💼 今週のビジネス機会 Top {news_count}（表形式で記載）
+    ## 💼 ビジネス機会 Top {news_count} : {period}（表形式で記載）
     優先トピックに関連するビジネス機会について、市場分析、競合状況、収益モデルなどの概要を表形式で記載
     その後、各ビジネス機会の詳細を箇条書きで記載
 
-    ## 📈 今週の株価予測・投資推奨（表形式で記載）
+    ## 📈 株価予測・投資推奨 : {period}（表形式で記載）
     主要銘柄について、予測、根拠、リスク、アクションプランを表形式で記載
     その後、各株価予想の詳細を箇条書きで記載
 
-    ## 📅 今週のアクションプラン（表形式で記載）
-    今週のアクションプランを表形式で記載。作業時間の目安の時間のみで曜日や時間帯は記載しない。
+    ## 📅 アクションプラン : {period}（表形式で記載）
+    {period}のアクションプランを表形式で記載。作業時間の目安の時間のみで曜日や時間帯は記載しない。
     その後、各アクションプランの詳細を箇条書きで記載。
 
-    ## 📚 今週の学習プラン（表形式で記載）
-    今週の自身のスキルアップのための学習プランの概要スケジュールを表形式で記載。作業時間の目安の時間のみで曜日や時間帯は記載しない。
+    ## 📚 学習プラン : {period}（表形式で記載）
+    {period}の自身のスキルアップのための学習プランの概要スケジュールを表形式で記載。作業時間の目安の時間のみで曜日や時間帯は記載しない。
+    優先度が高く、スキル習得度の点数が低い項目から優先的に学習プランを作成
     その後、各学習プランの詳細を箇条書きで記載
 
     ## 📊 統合分析サマリー（表形式で記載）
