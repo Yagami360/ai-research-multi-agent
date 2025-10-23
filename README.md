@@ -216,21 +216,4 @@ uv run python -m src.main --mcp-servers github,huggingface
    export GITHUB_TOKEN="your_github_token"
    ```
 
-**Hugging Face MCP Server**:
-1. Hugging Face トークンの取得:
-   - [Hugging Face Settings](https://huggingface.co/settings/tokens) からアクセストークンを作成
-   - トークンタイプは `read` で十分です
-
-2. 環境変数の設定:
-   ```bash
-   export HF_TOKEN="your_huggingface_token"
-   ```
-
-   または `.env` ファイルに追加:
-   ```
-   HF_TOKEN=your_huggingface_token
-   ```
-
-> **Note**: ローカル環境では初回実行時に自動的にログインプロンプトが表示されますが、CI/CD環境では`HF_TOKEN`の設定が必須です
-
 詳細は [`mcp/mcp_servers.yaml`](mcp/mcp_servers.yaml) を参照してください。
