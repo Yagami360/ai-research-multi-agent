@@ -90,9 +90,6 @@ class AIResearchMultiAgent:
 
 - レポート日時: `{datetime.now().strftime("%Y-%m-%d %H:%M")}`
 - 使用モデル: `{self.model_name}`
-- ソースリポジトリ:
-  - [ai-tech-catchup-agent](https://github.com/Yagami360/ai-tech-catchup-agent)
-  - [ai-paper-catchup-agent](https://github.com/Yagami360/ai-paper-catchup-agent)
 
 > **💡 質疑応答について**
 > このレポート内容について質問したい場合は、コメントで `@claude` または `@gemini-cli` とメンションすると、AI が自動的に回答します。
@@ -166,9 +163,6 @@ class AIResearchMultiAgent:
 - レポート日時: `{datetime.now().strftime("%Y-%m-%d %H:%M")}`
 - 調査期間: `{week_period}`
 - 使用モデル: `{self.model_name}`
-- ソースリポジトリ:
-  - [ai-tech-catchup-agent](https://github.com/Yagami360/ai-tech-catchup-agent)
-  - [ai-paper-catchup-agent](https://github.com/Yagami360/ai-paper-catchup-agent)
 
 > **💡 質疑応答について**
 > このレポート内容について質問したい場合は、コメントで `@claude` または `@gemini-cli` とメンションすると、AI が自動的に回答します。
@@ -233,9 +227,6 @@ class AIResearchMultiAgent:
 - レポート日時: `{datetime.now().strftime("%Y-%m-%d %H:%M")}`
 - 調査期間: `{month_period}`
 - 使用モデル: `{self.model_name}`
-- ソースリポジトリ:
-  - [ai-tech-catchup-agent](https://github.com/Yagami360/ai-tech-catchup-agent)
-  - [ai-paper-catchup-agent](https://github.com/Yagami360/ai-paper-catchup-agent)
 
 > **💡 質疑応答について**
 > このレポート内容について質問したい場合は、コメントで `@claude` または `@gemini-cli` とメンションすると、AI が自動的に回答します。

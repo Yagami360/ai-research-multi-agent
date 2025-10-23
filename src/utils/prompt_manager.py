@@ -179,7 +179,7 @@ class PromptManager:
                     prompt_text = prompt_text.replace("{period}", kwargs["month_period"])
                 elif prompt_type == "report":
                     prompt_text = prompt_text.replace("{period}", kwargs["week_period"])
-            
+
             # MCP指示が含まれている場合は置換
             if "{mcp_tools}" in prompt_text and "mcp_tools" in kwargs:
                 prompt_text = prompt_text.replace("{mcp_tools}", kwargs["mcp_tools"])

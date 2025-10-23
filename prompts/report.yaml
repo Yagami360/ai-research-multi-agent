@@ -23,6 +23,7 @@ source_agents:
       指定された期間と重複または近接する調査期間を持つIssueを取得。
       月次レポート(label:monthly-report): Issue本文内の「調査期間: YYYY-MM-DD ~ YYYY-MM-DD」フィールドを確認し、
       指定された期間と重複または近接する調査期間を持つIssueを取得。
+      Closed Issue も取得すること。
 
   ai_paper_catchup_agent:
     title: "Agent2: AI Paper Catchup"
@@ -45,6 +46,7 @@ source_agents:
       指定された期間と重複または近接する調査期間を持つIssueを取得。
       月次レポート(label:monthly-report): Issue本文内の「調査期間: YYYY-MM-DD ~ YYYY-MM-DD」フィールドを確認し、
       指定された期間と重複または近接する調査期間を持つIssueを取得。
+      Closed Issue も取得すること。
 
 report:
   title: "AI R&D Action Plan Report"
@@ -61,7 +63,7 @@ report:
     4. 学習プラン策定: 優先技術の効率的な学習スケジュールを作成
 
     # 出力の原則
-    - アクション志向: 「{period}の優先アクション」を明確に
+    - アクション志向: 「{period} 期間での優先アクション」を明確に
     - データドリブン: 全ての判断にAgent1/Agent2のデータで根拠を示す
     - 具体性: 抽象的な提案ではなく、時刻・URL・具体的手順を提示
 
@@ -90,6 +92,7 @@ report:
       - 各Issue本文（body）全体を詳細に読み取る
       - 取得期間: レポート作成時点から過去数ヶ月以内のIssueを全て取得
       - 期間フィルタリングの方法は各Agent定義に記載されている通り
+      - Closed Issue も取得すること
 
     方法B: WebSearch機能を使用（GitHub MCPサーバーが利用できない場合）
       - 以下の2つのソースAgentリポジトリからIssueを取得してください
@@ -100,6 +103,7 @@ report:
       - ai-paper-catchup-agent: site:github.com/Yagami360/ai-paper-catchup-agent issues label:weekly-report
       - ai-paper-catchup-agent: site:github.com/Yagami360/ai-paper-catchup-agent issues label:monthly-report
       - 取得したIssue URLをWebFetch機能で開いて、Issue本文全体を読み取る
+      - Closed Issue も取得すること
       - 取得期間: レポート作成時点から過去数ヶ月以内のIssueを全て取得
 
     取得後の確認:
@@ -172,21 +176,21 @@ report:
        - 技術の成熟曲線（実用期=10点、研究期=5点）
        - 次世代技術の萌芽（まだ先=10点、すぐ=5点）
 
-    6. スキル習得度 (/10)
-       - 現時点では全て0点（未習得想定）
+    6. スキル未習得度 (/10)
+       - 現時点では全て10点（未習得想定）
        - 将来的に https://github.com/Yagami360 の全 GitHub レポジトリからスキル習得状況情報を取得して、動的に調整
 
     ---
 
-    ## Step 4: Top {news_count} 選定と{period}のアクション生成
+    ## Step 4: Top {news_count} 選定と {period} 期間でのアクション生成
 
-    スコア上位{news_count}個のトピックについて、「{period}やるべきこと」を生成してください。
+    スコア上位{news_count}個のトピックについて、「{period} 期間でやるべきこと」を生成してください。
 
     各トピックに含めるべき内容:
     1. スコア内訳の表形式サマリー
     2. Agent1からの具体的情報（企業名、製品名、数値）
     3. Agent2からの関連論文Top {news_count}（タイトル、発表日、被引用数、Code有無）
-    4. {period}の優先アクション
+    4. {period} 期間での優先アクション
 
     ---
 
@@ -220,7 +224,7 @@ report:
 
     ## Step 7: 学習プラン生成
 
-    Top {news_count} トピックの学習スケジュール（{period}）を作成してください。
+    Top {news_count} トピックの学習スケジュール（{period} 期間）を作成してください。
 
     スケジュール設計の原則:
     - 全体像把握（全体の10~30%の時間）
@@ -250,7 +254,7 @@ report:
     - データ量: 各ソース Agent の GitHub Issue の本文のトークン数など
 
     ## 🔥 優先トピック Top {news_count} : {period}（表形式で記載）
-    {period}の優先トピック Top {news_count} について、トピック概要、スコア、優先根拠、アクションプランなどの概要を表形式で記載
+    {period} 期間での優先トピック Top {news_count} について、トピック概要、スコア、優先根拠、アクションプランなどの概要を表形式で記載
     その後、各優先トピックの詳細を箇条書きで記載
 
     ## 💼 ビジネス機会 Top {news_count} : {period}（表形式で記載）
@@ -262,12 +266,12 @@ report:
     その後、各株価予想の詳細を箇条書きで記載
 
     ## 📅 アクションプラン : {period}（表形式で記載）
-    {period}のアクションプランを表形式で記載。作業時間の目安の時間のみで曜日や時間帯は記載しない。
+    {period} 期間でのアクションプランを表形式で記載。作業時間の目安の時間のみで曜日や時間帯は記載しない。
     その後、各アクションプランの詳細を箇条書きで記載。
 
     ## 📚 学習プラン : {period}（表形式で記載）
-    {period}の自身のスキルアップのための学習プランの概要スケジュールを表形式で記載。作業時間の目安の時間のみで曜日や時間帯は記載しない。
-    優先度が高く、スキル習得度の点数が低い項目から優先的に学習プランを作成
+    {period} 期間での自身のスキルアップのための学習プランの概要スケジュールを表形式で記載。作業時間の目安の時間のみで曜日や時間帯は記載しない。
+    スコアが高く、スキル未習得度のスコアが高い項目から優先的に学習プランを作成
     その後、各学習プランの詳細を箇条書きで記載
 
     ## 📊 統合分析サマリー（表形式で記載）
