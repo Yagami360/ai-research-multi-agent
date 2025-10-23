@@ -24,10 +24,6 @@ class Settings(BaseSettings):
     github_token: str = os.getenv("GITHUB_TOKEN", "")
     github_repo: str = os.getenv("GITHUB_REPOSITORY", "Yagami360/ai-research-multi-agent")
 
-    # ソースリポジトリ設定（レポート取得元）
-    source_tech_repo: str = os.getenv("SOURCE_TECH_REPO", "Yagami360/ai-tech-catchup-agent")
-    source_paper_repo: str = os.getenv("SOURCE_PAPER_REPO", "Yagami360/ai-paper-catchup-agent")
-
     # MCP設定
     # カンマ区切りで有効にする MCP サーバーを指定（例: "github,slack"）
     enabled_mcp_servers: str = os.getenv("ENABLED_MCP_SERVERS", "")

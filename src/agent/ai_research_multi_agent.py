@@ -86,7 +86,7 @@ class AIResearchMultiAgent:
             # 2. GitHub Issue作成（オプション）
             if create_issue:
                 logger.info("GitHub Issueを作成中...")
-                issue_body = f"""# 📊 AI Research Multi Analysis Report
+                issue_body = f"""# 📊 AI R&D Action Plan Report
 
 - レポート日時: `{datetime.now().strftime("%Y-%m-%d %H:%M")}`
 - 使用モデル: `{self.model_name}`
@@ -106,9 +106,9 @@ class AIResearchMultiAgent:
 *このレポートは AI Research Multi Agent によって自動生成されました。*
 """
                 issue_result = self.github_client.create_issue(
-                    title=f"📊 AI Research Multi Analysis Report - {datetime.now().strftime('%Y-%m-%d')}",
+                    title=f"📊 AI R&D Action Plan Report - {datetime.now().strftime('%Y-%m-%d')}",
                     body=issue_body,
-                    labels=["analysis-report", self.model_name],
+                    labels=["report", self.model_name],
                 )
 
                 if "error" in issue_result:
@@ -161,7 +161,7 @@ class AIResearchMultiAgent:
                 # 週番号を計算（月の第何週目か）
                 week_number = (today.day - 1) // 7 + 1
                 week_title = f"{today.strftime('%Y年%m月')}第{week_number}週"
-                issue_body = f"""# 📊 AI Research Multi Weekly Analysis Report
+                issue_body = f"""# 📊 AI R&D Action Plan Weekly Report
 
 - レポート日時: `{datetime.now().strftime("%Y-%m-%d %H:%M")}`
 - 調査期間: `{week_period}`
@@ -182,9 +182,9 @@ class AIResearchMultiAgent:
 *このレポートは AI Research Multi Agent によって自動生成されました。*
 """
                 issue_result = self.github_client.create_issue(
-                    title=f"📊 AI Research Multi Weekly Analysis Report - {week_title}",
+                    title=f"📊 AI R&D Action Plan Monthly Report - {week_title}",
                     body=issue_body,
-                    labels=["weekly-analysis", self.model_name],
+                    labels=["weekly-report", self.model_name],
                 )
                 if issue_result.get("html_url"):
                     result["issue_url"] = issue_result.get("html_url", "")
@@ -228,7 +228,7 @@ class AIResearchMultiAgent:
                 yesterday = today - timedelta(days=1)
                 month_ago = yesterday - timedelta(days=29)  # 前日から30日間
                 month_period = f"{month_ago.strftime('%Y-%m-%d')} ~ {yesterday.strftime('%Y-%m-%d')}"
-                issue_body = f"""# 📈 AI Research Multi Monthly Analysis Report
+                issue_body = f"""# 📈 AI R&D Action Plan Monthly Report
 
 - レポート日時: `{datetime.now().strftime("%Y-%m-%d %H:%M")}`
 - 調査期間: `{month_period}`
@@ -249,9 +249,9 @@ class AIResearchMultiAgent:
 *このレポートは AI Research Multi Agent によって自動生成されました。*
 """
                 issue_result = self.github_client.create_issue(
-                    title=f"📈 AI Research Multi Monthly Analysis Report - {datetime.now().strftime('%Y年%m月')}",
+                    title=f"📈 AI R&D Action Plan Monthly Report - {datetime.now().strftime('%Y年%m月')}",
                     body=issue_body,
-                    labels=["monthly-analysis", self.model_name],
+                    labels=["monthly-report", self.model_name],
                 )
                 if issue_result.get("html_url"):
                     result["issue_url"] = issue_result.get("html_url", "")
