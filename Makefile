@@ -1,4 +1,4 @@
-.PHONY: install setup run run-weekly run-monthly test lint format format-check
+.PHONY: install setup run run-weekly run-monthly run-adk test-adk test lint format format-check
 
 # Install dependencies
 install:
@@ -24,13 +24,22 @@ run-weekly: install
 run-monthly: install
 	uv run python -m src.main monthly
 
+# Run AI Agent for latest report with Google ADK
+run-adk: install
+	cd src/google_adk && uv run adk run ai_research_multi_agent
+
 # Run AI Agent with test mode
-TEST_MODEL ?= claude-3-5-haiku-20241022
+# TEST_MODEL ?= claude-3-5-haiku-20241022
 # TEST_MODEL ?= gemini-2.0-flash-lite
-# TEST_MODEL ?= gemini-2.5-flash
+TEST_MODEL ?= gemini-2.5-flash
 test: install
 	@echo "Running test report..."
 	uv run python -m src.main test --model $(TEST_MODEL) --max-tokens 1000 --news-count 1 --no-issue --mcp-servers github
+
+# Run AI Agent with test mode using Google ADK
+# test-adk: install
+# 	@echo "Running test report with Google ADK..."
+# 	cd src/google_adk && uv run adk run ai_research_multi_agent
 
 # Run code linting
 lint: install
